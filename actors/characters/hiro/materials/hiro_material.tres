@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://b65iw0lnaghim"]
+
+[ext_resource type="Texture2D" uid="uid://cgllltopfqhpo" path="res://actors/characters/hiro/materials/hiro_0.png" id="1_7ksuy"]
+[ext_resource type="Texture2D" uid="uid://bbsesi45mkfj0" path="res://actors/characters/hiro/materials/hiro_1.png" id="2_3liwj"]
+[ext_resource type="Texture2D" uid="uid://dsxr75gw58t8w" path="res://actors/characters/hiro/materials/hiro_4.png" id="3_5bk1t"]
+
+[resource]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 0.8)
+albedo_texture = ExtResource("1_7ksuy")
+emission_enabled = true
+emission_texture = ExtResource("2_3liwj")
+normal_enabled = true
+normal_scale = 0.0
+normal_texture = ExtResource("3_5bk1t")

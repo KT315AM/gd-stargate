@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ch38rq88k53lg" path="res://actors/characters/hiro/hiro.tscn" id="1_a4i74"]
 [ext_resource type="PackedScene" uid="uid://d26nkce3sf1uy" path="res://world/cameras/top_down_camera.tscn" id="2_e4y4c"]
+[ext_resource type="PackedScene" uid="uid://5r5w8wfwxq7l" path="res://world/blocking/wall.tscn" id="3_e4y4c"]
 
 [sub_resource type="Environment" id="Environment_hg5jy"]
 
@@ -34,3 +35,25 @@ shape = SubResource("BoxShape3D_xrl57")
 
 [node name="TopDownCamera" parent="." unique_id=1414056634 node_paths=PackedStringArray("target") instance=ExtResource("2_e4y4c")]
 target = NodePath("../Hiro")
+
+[node name="Env" type="Node" parent="." unique_id=1997329938]
+
+[node name="Walls" type="Node" parent="Env" unique_id=35267093]
+
+[node name="Wall" parent="Env/Walls" unique_id=325657451 instance=ExtResource("3_e4y4c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.475091)
+
+[node name="Wall2" parent="Env/Walls" unique_id=227685936 instance=ExtResource("3_e4y4c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6576371, 0, -7.475091)
+
+[node name="Wall3" parent="Env/Walls" unique_id=979387587 instance=ExtResource("3_e4y4c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.689495, 0, -7.475091)
+
+[node name="Wall4" parent="Env/Walls" unique_id=772115553 instance=ExtResource("3_e4y4c")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -5.796454, 0, -8.845985)
+
+[node name="Wall5" parent="Env/Walls" unique_id=1820822193 instance=ExtResource("3_e4y4c")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -3.9172206, 0, -10.725218)
+
+[node name="Wall6" parent="Env/Walls" unique_id=1803863716 instance=ExtResource("3_e4y4c")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -7.698214, 0, -6.944225)
