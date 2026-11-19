@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://b6iywy4pa7oaa"]
+
+[ext_resource type="PackedScene" uid="uid://ch38rq88k53lg" path="res://actors/characters/hiro/hiro.tscn" id="1_a4i74"]
+[ext_resource type="PackedScene" uid="uid://d26nkce3sf1uy" path="res://world/cameras/top_down_camera.tscn" id="2_e4y4c"]
+
+[sub_resource type="Environment" id="Environment_hg5jy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_usb5b"]
+size = Vector3(40, 0.2, 40)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xrl57"]
+size = Vector3(40, 0.2, 40)
+
+[node name="TestMap" type="Node" unique_id=226714272]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=465641005]
+environment = SubResource("Environment_hg5jy")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2129816226]
+transform = Transform3D(0.8660254, 0.40957603, -0.28678823, 0, 0.57357645, 0.81915206, 0.5, -0.7094065, 0.49673176, 0, 10, 0)
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1595961076]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1577534513]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+mesh = SubResource("BoxMesh_usb5b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=615883155]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+shape = SubResource("BoxShape3D_xrl57")
+
+[node name="Hiro" parent="." unique_id=1293729221 instance=ExtResource("1_a4i74")]
+
+[node name="TopDownCamera" parent="." unique_id=1414056634 node_paths=PackedStringArray("target") instance=ExtResource("2_e4y4c")]
+target = NodePath("../Hiro")

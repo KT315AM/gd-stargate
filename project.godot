@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Stargate: Legacy"
+run/main_scene="uid://b6iywy4pa7oaa"
 config/features=PackedStringArray("4.8", "Forward Plus")
 config/icon="uid://dkw45g0fah2nu"
 

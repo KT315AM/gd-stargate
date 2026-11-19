@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://d26nkce3sf1uy"]
+
+[ext_resource type="Script" uid="uid://cxa35ssswkrmh" path="res://world/cameras/top_down_camera.gd" id="1_engsm"]
+
+[node name="TopDownCamera" type="Node3D" unique_id=1414056634]
+script = ExtResource("1_engsm")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2069515383]
+transform = Transform3D(1, 0, 0, 0, 0.57357645, 0.81915206, 0, -0.81915206, 0.57357645, 0, 14, 10)
+current = true
+fov = 55.0

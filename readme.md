@@ -1,11 +1,9 @@
 # Stargate: Legacy
----
 
 **A SCI-FI 3D RPG with top down view set in a galaxy hidden behind the Veil. Inspired by Stargate universe.**
 
 
 ## Tech stack
----
 
 |                    |            |
 | ------------------ | ---------- |
@@ -14,7 +12,6 @@
 
 
 ## Lore
----
 
 Two hundred years after a slave rebellion toppled the last of the Goa'uld, the victors built something worse. The **Concordate** — a militarized empire of former slaves turned wardens — now patrols the Veil, a pocket galaxy sealed off by the Ancients, dismantling or isolating any civilization that crosses its technological threshold. Earth's Stargate network is gone. The last human outpost drifts in the void between galaxies: the ark-ship *Legacy*.
 
