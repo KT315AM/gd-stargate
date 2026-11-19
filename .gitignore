@@ -1,0 +1,8 @@
+# Godot/IDE specific ignores
+.godot/
+.vscode/
+addons/
+/android/
+
+# Game specific
+docs/
