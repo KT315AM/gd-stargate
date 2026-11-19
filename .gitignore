@@ -5,4 +5,4 @@ addons/
 /android/
 
 # Game specific
-docs/
+_temp/
