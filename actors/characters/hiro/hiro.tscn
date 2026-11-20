@@ -12,6 +12,9 @@
 [ext_resource type="Script" uid="uid://dlel1piv7tka" path="res://actors/characters/components/animation_component.gd" id="8_g6d0x"]
 [ext_resource type="Script" uid="uid://mit5uapetxs6" path="res://actors/characters/components/arm_ik_modifier.gd" id="9_arm_ik"]
 
+[ext_resource type="Script" path="res://actors/characters/components/health_component.gd" id="10_health"]
+[ext_resource type="Script" path="res://actors/characters/components/combat_component.gd" id="11_combat"]
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wq3o7"]
 radius = 0.4
 height = 1.8
@@ -248,5 +251,11 @@ weapon_rig = NodePath("../Model/WeaponRig")
 script = ExtResource("8_g6d0x")
 animation_tree = NodePath("../Model/AnimationTree")
 metadata/_custom_type_script = "uid://dlel1piv7tka"
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("10_health")
+
+[node name="CombatComponent" type="Node" parent="."]
+script = ExtResource("11_combat")
 
 [editable path="Model"]
