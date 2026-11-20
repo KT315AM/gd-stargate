@@ -5,6 +5,9 @@ extends CharacterComponent
 @export_group("Aim")
 @export var upper_body_aim_modifier: UpperBodyAimModifier
 
+@export_range(1.0, 1000.0, 1.0)
+var max_aim_distance: float = 100.0
+
 
 func _ready() -> void:
     if not upper_body_aim_modifier:
@@ -27,11 +30,16 @@ func _update_aim() -> void:
     var mouse_position := get_viewport().get_mouse_position()
     var ray_origin := camera.project_ray_origin(mouse_position)
     var ray_direction := camera.project_ray_normal(mouse_position)
-    var aim_plane := Plane(Vector3.UP, character.global_position.y)
-    var intersection = aim_plane.intersects_ray(ray_origin, ray_direction)
+    var ray_end := ray_origin + ray_direction * max_aim_distance
 
-    if not intersection:
-        upper_body_aim_modifier.clear_aim_target()
-        return
+    var query := PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
+    query.exclude = [character.get_rid()]
 
-    upper_body_aim_modifier.set_aim_target(intersection)
+    var hit := character.get_world_3d().direct_space_state.intersect_ray(query)
+    var aim_target: Vector3 = ray_end
+
+    if not hit.is_empty():
+        aim_target = hit["position"]
+
+    upper_body_aim_modifier.set_aim_target(aim_target)
+}
