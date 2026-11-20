@@ -2,16 +2,26 @@ class_name AimComponent
 extends CharacterComponent
 
 
+@export_group("Aim")
+@export var upper_body_aim_modifier: UpperBodyAimModifier
+
+
+func _ready() -> void:
+    if not upper_body_aim_modifier:
+        push_warning("UpperBodyAimModifier is not assigned.")
+
+
 func _process(_delta: float) -> void:
     _update_aim()
 
 
 func _update_aim() -> void:
-    if not character.model:
+    if not upper_body_aim_modifier:
         return
 
     var camera := get_viewport().get_camera_3d()
     if not camera:
+        upper_body_aim_modifier.clear_aim_target()
         return
 
     var mouse_position := get_viewport().get_mouse_position()
@@ -21,13 +31,7 @@ func _update_aim() -> void:
     var intersection = aim_plane.intersects_ray(ray_origin, ray_direction)
 
     if not intersection:
+        upper_body_aim_modifier.clear_aim_target()
         return
 
-    var aim_position: Vector3 = intersection
-    var direction := aim_position - character.model.global_position
-    direction.y = 0.0
-
-    if direction.length_squared() < 0.0001:
-        return
-
-    character.model.look_at(aim_position, Vector3.UP)
+    upper_body_aim_modifier.set_aim_target(intersection)

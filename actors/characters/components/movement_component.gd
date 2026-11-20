@@ -13,6 +13,11 @@ var acceleration: float = 20.0
 var deceleration: float = 24.0
 
 
+@export_group("Facing")
+@export_range(0.1, 20.0, 0.1)
+var turn_speed: float = 12.0
+
+
 @export_group("Physics")
 @export var gravity: float = 9.8
 
@@ -20,8 +25,9 @@ var deceleration: float = 24.0
 func _physics_process(delta: float) -> void:
     _update_movement(delta)
     _update_gravity(delta)
-
     character.move_and_slide()
+    
+    _update_facing(delta)
 
 
 func _update_movement(delta: float) -> void:
@@ -70,3 +76,22 @@ func _update_gravity(delta: float) -> void:
             character.velocity.y = -0.1
     else:
         character.velocity.y -= gravity * delta
+
+
+func _update_facing(delta: float) -> void:
+    if not character.model:
+        return
+
+    var direction := character.get_real_velocity()
+    direction.y = 0.0
+
+    if direction.length_squared() < 0.0025:
+        return
+
+    var target_yaw := atan2(-direction.x, -direction.z)
+
+    character.model.global_rotation.y = rotate_toward(
+        character.model.global_rotation.y,
+        target_yaw,
+        turn_speed * delta
+    )
