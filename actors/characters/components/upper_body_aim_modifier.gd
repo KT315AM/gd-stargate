@@ -112,13 +112,11 @@ func _update_aim_angles(delta: float, skeleton: Skeleton3D, model: Node3D) -> vo
     var target_pitch: float = 0.0
 
     if _has_aim_target:
-        var target_local := skeleton.to_local(_aim_target)
-        var origin_local := skeleton.to_local(model.global_position)
-        var direction := target_local - origin_local
+        var direction := model.to_local(_aim_target)
         var horizontal_length := Vector2(direction.x, direction.z).length()
 
         if direction.length_squared() > 0.0001:
-            target_yaw = atan2(direction.x, -direction.z)
+            target_yaw = -atan2(direction.x, -direction.z)
             target_pitch = atan2(direction.y, horizontal_length)
 
     target_yaw = clampf(
