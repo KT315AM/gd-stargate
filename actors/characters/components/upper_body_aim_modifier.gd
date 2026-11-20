@@ -1,3 +1,5 @@
+@warning_ignore_start("shadowed_variable_base_class")
+
 class_name UpperBodyAimModifier
 extends SkeletonModifier3D
 ## Rotates the upper body towards the aim target.
@@ -196,13 +198,7 @@ func _rotate_bone(
         return
 
     var bone_pose := skeleton.get_bone_global_pose(bone_index)
-    var rotation := (
-        Basis(Vector3.UP, yaw)
-        * Basis(Vector3.RIGHT, -pitch)
-    )
-    var modified_pose := Transform3D(
-        rotation * bone_pose.basis,
-        bone_pose.origin
-    )
+    var rotation := Basis(Vector3.UP, yaw) * Basis(Vector3.RIGHT, -pitch)
+    var modified_pose := Transform3D(rotation * bone_pose.basis, bone_pose.origin)
 
     skeleton.set_bone_global_pose(bone_index, modified_pose)

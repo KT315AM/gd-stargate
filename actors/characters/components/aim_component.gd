@@ -42,4 +42,3 @@ func _update_aim() -> void:
         aim_target = hit["position"]
 
     upper_body_aim_modifier.set_aim_target(aim_target)
-}
