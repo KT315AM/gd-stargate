@@ -62,17 +62,23 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-    if event is InputEventMouseButton:
-        if event.button_index == MOUSE_BUTTON_MIDDLE:
-            _is_rotating = event.pressed
-        elif event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_UP:
-            _zoom(-1.0, event.factor)
-        elif event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-            _zoom(1.0, event.factor)
+    if event.is_action_pressed("camera_zoom_in"):
+        var factor := event.factor if event is InputEventMouseButton else 1.0
+        _zoom(-1.0, factor)
 
-    elif event is InputEventMouseMotion and _is_rotating:
+    elif event.is_action_pressed("camera_zoom_out"):
+        var factor := event.factor if event is InputEventMouseButton else 1.0
+        _zoom(1.0, factor)
+
+    elif event.is_action_pressed("camera_rotation"):
+        _is_rotating = true
+
+    elif event.is_action_released("camera_rotation"):
+        _is_rotating = false
+
+    elif event is InputEventMouseMotion and Input.is_action_pressed("camera_rotation"):
         _target_yaw -= event.relative.x * rotation_sensitivity
-        _target_pitch -= event.relative.y * rotation_sensitivity
+        _target_pitch += event.relative.y * rotation_sensitivity
         _target_pitch = clampf(
             _target_pitch,
             deg_to_rad(min_pitch_degrees),
