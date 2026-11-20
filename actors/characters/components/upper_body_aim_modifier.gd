@@ -103,11 +103,11 @@ func _process_modification_with_delta(delta: float) -> void:
     if not model:
         return
 
-    _update_aim_angles(delta, skeleton, model)
+    _update_aim_angles(delta, model)
     _apply_aim_rotation(skeleton)
 
 
-func _update_aim_angles(delta: float, skeleton: Skeleton3D, model: Node3D) -> void:
+func _update_aim_angles(delta: float, model: Node3D) -> void:
     var target_yaw: float = 0.0
     var target_pitch: float = 0.0
 
@@ -198,7 +198,7 @@ func _rotate_bone(
     var bone_pose := skeleton.get_bone_global_pose(bone_index)
     var rotation := (
         Basis(Vector3.UP, yaw)
-        * Basis(Vector3.RIGHT, pitch)
+        * Basis(Vector3.RIGHT, -pitch)
     )
     var modified_pose := Transform3D(
         rotation * bone_pose.basis,
