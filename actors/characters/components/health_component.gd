@@ -35,7 +35,7 @@ func apply_damage(damage: DamageInfo) -> float:
 		return 0.0
 
 	var applied_amount := minf(maxf(damage.amount, 0.0), current_health)
-	if is_zero_approx(applied_amount):
+	if applied_amount <= 0.0:
 		return 0.0
 
 	current_health = maxf(current_health - applied_amount, 0.0)
@@ -43,7 +43,7 @@ func apply_damage(damage: DamageInfo) -> float:
 	damage_received.emit(damage, applied_amount)
 	health_changed.emit(current_health, max_health)
 
-	if is_zero_approx(current_health):
+	if current_health <= 0.0:
 		died.emit(damage)
 
 	return applied_amount
