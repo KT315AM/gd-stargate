@@ -54,7 +54,7 @@ func heal(amount: float) -> float:
 		return 0.0
 
 	var applied_amount := minf(amount, max_health - current_health)
-	if is_zero_approx(applied_amount):
+	if applied_amount <= 0.0:
 		return 0.0
 
 	current_health += applied_amount
