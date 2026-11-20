@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dwfc1fxqb8l2f" path="res://actors/characters/hiro/hiro.fbx" id="2_ak01b"]
 [ext_resource type="Script" uid="uid://2jbsyhxpr021" path="res://actors/characters/components/aim_component.gd" id="3_ak01b"]
 [ext_resource type="Script" uid="uid://d0bahncdub1wi" path="res://actors/characters/components/upper_body_aim_modifier.gd" id="3_qc3xf"]
+[ext_resource type="Script" path="res://actors/characters/components/arm_ik_modifier.gd" id="9_arm_ik"]
 [ext_resource type="Animation" uid="uid://bmoaxayaa3lun" path="res://actors/characters/hiro/animations/idle.res" id="3_wq3o7"]
 [ext_resource type="Animation" uid="uid://branhc62wp27e" path="res://actors/characters/hiro/animations/run.res" id="4_huwrn"]
 [ext_resource type="Animation" uid="uid://bgeh76w8b781y" path="res://actors/characters/hiro/animations/walk.res" id="5_g6d0x"]
@@ -189,6 +190,37 @@ active = true
 influence = 1.0
 script = ExtResource("3_qc3xf")
 
+[node name="RightArmIKModifier" type="TwoBoneIK3D" parent="Model/Skeleton3D" index="2" node_paths=PackedStringArray("target_node", "pole_node")]
+script = ExtResource("9_arm_ik")
+root_bone_name = &"mixamorig1_RightArm"
+middle_bone_name = &"mixamorig1_RightForeArm"
+end_bone_name = &"mixamorig1_RightHand"
+target_node = NodePath("../../WeaponRig/RightHandTarget")
+pole_node = NodePath("../../WeaponRig/RightElbowPole")
+
+[node name="LeftArmIKModifier" type="TwoBoneIK3D" parent="Model/Skeleton3D" index="3" node_paths=PackedStringArray("target_node", "pole_node")]
+script = ExtResource("9_arm_ik")
+root_bone_name = &"mixamorig1_LeftArm"
+middle_bone_name = &"mixamorig1_LeftForeArm"
+end_bone_name = &"mixamorig1_LeftHand"
+target_node = NodePath("../../WeaponRig/LeftHandTarget")
+pole_node = NodePath("../../WeaponRig/LeftElbowPole")
+
+[node name="WeaponRig" type="Node3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, -0.2)
+
+[node name="RightHandTarget" type="Marker3D" parent="Model/WeaponRig"]
+position = Vector3(0.22, 0.0, -0.35)
+
+[node name="LeftHandTarget" type="Marker3D" parent="Model/WeaponRig"]
+position = Vector3(-0.2, 0.0, -0.55)
+
+[node name="RightElbowPole" type="Marker3D" parent="Model/WeaponRig"]
+position = Vector3(0.55, -0.1, 0.15)
+
+[node name="LeftElbowPole" type="Marker3D" parent="Model/WeaponRig"]
+position = Vector3(-0.55, -0.1, 0.15)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Model" unique_id=2007802630]
 libraries/Hiro = SubResource("AnimationLibrary_g6d0x")
 autoplay = &"Hiro/idle"
@@ -203,9 +235,10 @@ parameters/Locomotion/observer = null
 script = ExtResource("2_agy5b")
 metadata/_custom_type_script = "uid://m4a22lpirawm"
 
-[node name="AimComponent" type="Node" parent="." unique_id=2065350594 node_paths=PackedStringArray("upper_body_aim_modifier")]
+[node name="AimComponent" type="Node" parent="." unique_id=2065350594 node_paths=PackedStringArray("upper_body_aim_modifier", "weapon_rig")]
 script = ExtResource("3_ak01b")
 upper_body_aim_modifier = NodePath("../Model/Skeleton3D/UpperBodyAimModifier")
+weapon_rig = NodePath("../Model/WeaponRig")
 
 [node name="AnimationComponent" type="Node" parent="." unique_id=984748045 node_paths=PackedStringArray("animation_tree")]
 script = ExtResource("8_g6d0x")
