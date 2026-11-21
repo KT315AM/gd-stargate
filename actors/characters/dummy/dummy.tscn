@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ba4tigpsnm7nx"]
+
+[ext_resource type="Script" uid="uid://bpcim6dtsrkqe" path="res://actors/characters/dummy/dummy.gd" id="1_2f0bf"]
+[ext_resource type="Script" uid="uid://bymvub8yu5tnp" path="res://actors/characters/components/health_component.gd" id="2_ch1eu"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5ogcu"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_new74"]
+
+[node name="Dummy" type="CharacterBody3D" unique_id=1095750906]
+script = ExtResource("1_2f0bf")
+
+[node name="Collider" type="CollisionShape3D" parent="." unique_id=1973221843]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_5ogcu")
+
+[node name="Model" type="MeshInstance3D" parent="." unique_id=266082121]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_new74")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1789567526]
+script = ExtResource("2_ch1eu")
+metadata/_custom_type_script = "uid://bymvub8yu5tnp"

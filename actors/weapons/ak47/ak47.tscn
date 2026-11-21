@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dangrgr0v8cyv"]
+
+[ext_resource type="PackedScene" uid="uid://dc2jvm771lbv6" path="res://actors/weapons/ak47/ak47.glb" id="1_168fa"]
+[ext_resource type="Script" uid="uid://bhbww3opg80d8" path="res://actors/weapons/raycast_weapon.gd" id="1_new74"]
+
+[node name="AK47" type="Node3D" unique_id=1882503277]
+script = ExtResource("1_new74")
+attack_rate = 3.0
+
+[node name="ak472" parent="." unique_id=1940885653 instance=ExtResource("1_168fa")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Muzzle" type="Marker3D" parent="." unique_id=920945856]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02765087, -0.48520514)
+
+[editable path="ak472"]

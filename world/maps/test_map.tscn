@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ch38rq88k53lg" path="res://actors/characters/hiro/hiro.tscn" id="1_a4i74"]
 [ext_resource type="PackedScene" uid="uid://d26nkce3sf1uy" path="res://world/cameras/top_down_camera.tscn" id="2_e4y4c"]
 [ext_resource type="PackedScene" uid="uid://5r5w8wfwxq7l" path="res://world/blocking/wall.tscn" id="3_e4y4c"]
+[ext_resource type="PackedScene" uid="uid://ba4tigpsnm7nx" path="res://actors/characters/dummy/dummy.tscn" id="4_hg5jy"]
 
 [sub_resource type="Environment" id="Environment_hg5jy"]
 
@@ -63,3 +64,6 @@ transform = Transform3D(0, 0, 1.9999999, 0, 2, 0, -1.9999999, 0, 0, 13.553658, 0
 
 [node name="Wall8" parent="Env/Walls" unique_id=1586189465 instance=ExtResource("3_e4y4c")]
 transform = Transform3D(0, 1.9999999, -8.742276e-08, 0, -8.742278e-08, -1.9999999, -1.9999998, 0, 0, 21.599253, -2.6508913, -3.2315936)
+
+[node name="Dummy" parent="." unique_id=1095750906 instance=ExtResource("4_hg5jy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4039135, 0, -5.9921713)
