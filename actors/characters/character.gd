@@ -14,3 +14,15 @@ extends CharacterBody3D
 # Components
 @onready var health_component: HealthComponent = get_node_or_null(^"HealthComponent")
 @onready var combat_component: CombatComponent = get_node_or_null(^"CombatComponent")
+
+
+func _ready() -> void:
+
+    # FIX: Temporary workaround unless Equipment system implementation
+    if main_weapon:
+        main_weapon.character = self
+        main_weapon.arm()
+
+    if secondary_weapon:
+        secondary_weapon.character = self
+        secondary_weapon.arm()
