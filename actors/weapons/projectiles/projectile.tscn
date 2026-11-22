@@ -1,27 +1,32 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cep51e6s5mck6"]
 
-[ext_resource type="Script" path="res://actors/weapons/projectiles/projectile.gd" id="1_projectile"]
+[ext_resource type="Script" uid="uid://bjrqyesb0j37k" path="res://actors/weapons/projectiles/projectile.gd" id="1_projectile"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_projectile"]
 radius = 0.05
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ft85"]
+albedo_color = Color(1, 0.29235542, 0, 1)
+roughness = 0.4
+
 [sub_resource type="SphereMesh" id="SphereMesh_projectile"]
+material = SubResource("StandardMaterial3D_3ft85")
 radius = 0.05
 height = 0.1
 
-[node name="Projectile" type="RigidBody3D"]
+[node name="Projectile" type="RigidBody3D" unique_id=409726705]
 collision_layer = 0
 collision_mask = 524295
+gravity_scale = 0.0
 continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 4
-gravity_scale = 0.0
 script = ExtResource("1_projectile")
 
-[node name="Collider" type="CollisionShape3D" parent="."]
+[node name="Collider" type="CollisionShape3D" parent="." unique_id=604360617]
 shape = SubResource("SphereShape3D_projectile")
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." unique_id=1700461670]
 
-[node name="Mesh" type="MeshInstance3D" parent="Model"]
+[node name="Mesh" type="MeshInstance3D" parent="Model" unique_id=1357190759]
 mesh = SubResource("SphereMesh_projectile")

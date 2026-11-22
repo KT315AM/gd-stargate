@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://f8kj3piwue2j"]
+
+[ext_resource type="Script" uid="uid://dvcbq1vxu7qat" path="res://actors/weapons/projectile_weapon.gd" id="1_ggnln"]
+[ext_resource type="PackedScene" path="res://actors/weapons/projectiles/projectile.tscn" id="2_n5co6"]
+[ext_resource type="PackedScene" uid="uid://b8csf1bai1n7f" path="res://actors/weapons/rocketlauncher/rocketlauncher.glb" id="2_xkuc4"]
+
+[node name="Rocketlauncher" type="Node3D" unique_id=1624528760]
+script = ExtResource("1_ggnln")
+projectile_scene = ExtResource("2_n5co6")
+metadata/_custom_type_script = "uid://dvcbq1vxu7qat"
+
+[node name="Model" parent="." unique_id=1024281948 instance=ExtResource("2_xkuc4")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="Muzzle" type="Marker3D" parent="." unique_id=953022349]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.46684447)
+
+[editable path="Model"]

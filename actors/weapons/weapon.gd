@@ -39,6 +39,8 @@ signal state_changed(previous_state: State, new_state: State)
 
 
 @export_group("References")
+## Object used as origin of emission (raycasts, projectiles). Defaults to Muzzle or Camera.
+@export var caster: Node3D
 @export var muzzle: Node3D
 
 
@@ -65,6 +67,9 @@ func _ready() -> void:
     
     if not muzzle:
         muzzle = get_node_or_null("Muzzle")
+    
+    if not caster:
+        caster = muzzle if muzzle else camera
 
 
 func arm():
@@ -112,6 +117,12 @@ func stop_attack() -> void:
     _on_attack_stopped()
 
 
+func process_hit(target: Node, damage_info: DamageInfo):
+    _on_hit(target, damage_info)
+    hit.emit(target, damage_info)
+    _play_hit_effects()
+
+
 func _on_attack() -> void:
     print("[%s] Attack" % [name])
 
@@ -125,9 +136,6 @@ func _on_attack_stopped() -> void:
 
 
 func _on_hit(target: Node, damage_info: DamageInfo):
-    hit.emit(target, damage_info)
-    _play_hit_effects()
-
     print("[%s] Hit: %s, %.2v, %.2v" % [name, target.name, damage_info.hit_position, damage_info.hit_normal])
 
 

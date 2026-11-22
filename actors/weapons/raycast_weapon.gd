@@ -3,19 +3,12 @@ extends Weapon
 ## Base class for raycast weapons
 
 
-## Object used as origin of raycast
-@export var caster: Node3D
-
-
 var _exclude_rids: Array[RID]
 
 
 func _ready() -> void:
     super()
     _exclude_rids = get_exclude_rids()
-
-    if not caster:
-        caster = muzzle if muzzle else camera
 
 
 func _on_attack() -> void:
@@ -39,7 +32,7 @@ func _on_attack() -> void:
     if result.is_empty():
         return
 
-    _on_hit(result.collider, DamageInfo.create(damage, damage_type, self, character, result.position, result.normal))
+    process_hit(result.collider, DamageInfo.create(damage, damage_type, self, character, result.position, result.normal))
     DebugDraw.draw_line(origin, end)
 
 

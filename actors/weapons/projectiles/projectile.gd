@@ -2,6 +2,11 @@ class_name Projectile
 extends RigidBody3D
 ## Base class for physical projectiles.
 
+@export_group("On Hit Behavior")
+@export var on_hit_destroy := false
+@export var on_hit_lifetime := 1.0
+@export var on_hit_gravity := 1.0
+
 
 var damage_amount: float = 0.0
 var damage_type: DamageInfo.Type = DamageInfo.Type.KINETIC
@@ -63,6 +68,10 @@ func _on_body_entered(body: Node) -> void:
     )
 
     if source_weapon and is_instance_valid(source_weapon):
-        source_weapon._on_hit(body, damage)
+        source_weapon.process_hit(body, damage)
 
-    queue_free()
+    if on_hit_destroy:
+        queue_free()
+    else:
+        _remaining_lifetime = on_hit_lifetime
+        gravity_scale = on_hit_gravity
