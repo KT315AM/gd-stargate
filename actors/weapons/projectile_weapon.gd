@@ -10,6 +10,15 @@ extends Weapon
 @export var projectile_lifetime: float = 5.0
 
 
+var caster: Node3D
+
+
+func _ready() -> void:
+    super()
+
+    caster = muzzle if muzzle else camera
+
+
 func _on_attack() -> void:
     super()
 
@@ -30,8 +39,11 @@ func _on_attack() -> void:
     if absf(direction.dot(up)) > 0.98:
         up = Vector3.RIGHT
 
+    var projectile_parent: Node = get_tree().current_scene
+    if not projectile_parent:
+        projectile_parent = get_tree().root
+
+    projectile_parent.add_child(projectile)
     projectile.global_transform = Transform3D(Basis.looking_at(direction, up), spawn_position)
     projectile.configure(damage, damage_type, self, character, projectile_lifetime)
     projectile.launch(direction, projectile_speed)
-
-    get_tree().current_scene.add_child(projectile)
