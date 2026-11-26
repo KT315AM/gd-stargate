@@ -10,15 +10,6 @@ extends Weapon
 @export var projectile_lifetime: float = 5.0
 
 
-var caster: Node3D
-
-
-func _ready() -> void:
-    super()
-
-    caster = muzzle if muzzle else camera
-
-
 func _on_attack() -> void:
     super()
 
