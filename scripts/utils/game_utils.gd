@@ -24,3 +24,18 @@ static func is_interactable(object: Node) -> bool:
 
 static func is_damageable(object: Node) -> bool:
     return has_any_traits(object, Constants.TRAIT_LAYER_DAMAGEABLE)
+
+
+static func find_unique_nodes(root: Node) -> Dictionary[StringName, Node]:
+    var result: Dictionary[StringName, Node] = {}
+    _collect_unique_nodes(root, root, result)
+    return result
+
+
+static func _collect_unique_nodes(current: Node, root: Node, result: Dictionary[StringName, Node]) -> void:
+    for child in current.get_children():
+        if child.unique_name_in_owner:
+            result[child.name] = child
+
+        if not child.scene_file_path:
+            _collect_unique_nodes(child, root, result)

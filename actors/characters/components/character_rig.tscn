@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bhvbyo0yl0j7"]
+
+[ext_resource type="Script" uid="uid://sdg3blnepa4j" path="res://actors/characters/components/character_rig.gd" id="1_4vfj7"]
+
+[node name="CharacterRig" type="Node3D" unique_id=889413010]
+script = ExtResource("1_4vfj7")
+
+[node name="HeadBA" type="BoneAttachment3D" parent="." unique_id=1762107359]
+bone_name = "Head"
+use_external_skeleton = true
+external_skeleton = NodePath("")
+
+[node name="HeadSlot" type="Node3D" parent="HeadBA" unique_id=806940040]
+unique_name_in_owner = true
+
+[node name="LeftHandBA" type="BoneAttachment3D" parent="." unique_id=693586594]
+bone_name = "LeftHand"
+use_external_skeleton = true
+external_skeleton = NodePath("")
+
+[node name="LeftHandSlot" type="Node3D" parent="LeftHandBA" unique_id=1564570480]
+unique_name_in_owner = true
+transform = Transform3D(-4.371139e-08, -1, 0, -4.371139e-08, 0, -1, 1, -4.371139e-08, -4.3711385e-08, 2.7939677e-09, 0.1142314, 0.03792724)
+
+[node name="RightHandBA" type="BoneAttachment3D" parent="." unique_id=589183383]
+bone_name = "RightHand"
+use_external_skeleton = true
+external_skeleton = NodePath("")
+
+[node name="RightHandSlot" type="Node3D" parent="RightHandBA" unique_id=271612304]
+unique_name_in_owner = true
+transform = Transform3D(-4.371139e-08, 1, -4.371139e-08, 0, -4.371139e-08, -1, -1, -4.371139e-08, 1.9106855e-15, 2.7939677e-09, 0.1142314, 0.03792724)

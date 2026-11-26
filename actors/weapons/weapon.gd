@@ -58,6 +58,10 @@ var can_attack: bool:
     get: return state == State.ARMED
 
 
+func _init() -> void:
+    _supported_slots = [Slot.LEFT_HAND, Slot.RIGHT_HAND]
+
+
 func _ready() -> void:
     _attack_timer = Timer.new()
     _attack_timer.timeout.connect(attack)

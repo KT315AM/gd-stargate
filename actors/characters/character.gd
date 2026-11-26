@@ -10,10 +10,12 @@ extends CharacterBody3D
 # Basic nodes
 @onready var collider: CollisionShape3D = get_node_or_null(^"Collider")
 @onready var model: Node3D = get_node_or_null(^"Model")
+@onready var rig: CharacterRig = get_node_or_null(^"Rig")
 
 # Components
 @onready var health_component: HealthComponent = get_node_or_null(^"HealthComponent")
 @onready var combat_component: CombatComponent = get_node_or_null(^"CombatComponent")
+@onready var equipment_component: EquipmentComponent = get_node_or_null(^"EquipmentComponent")
 
 
 func _ready() -> void:
