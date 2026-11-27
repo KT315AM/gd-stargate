@@ -4,8 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://d26nkce3sf1uy" path="res://world/cameras/top_down_camera.tscn" id="2_e4y4c"]
 [ext_resource type="PackedScene" uid="uid://5r5w8wfwxq7l" path="res://world/blocking/wall.tscn" id="3_e4y4c"]
 [ext_resource type="PackedScene" uid="uid://ba4tigpsnm7nx" path="res://actors/characters/dummy/dummy.tscn" id="4_hg5jy"]
+[ext_resource type="PackedScene" uid="uid://b7gv8nl6j5ygc" path="res://actors/characters/skeleton_minion/skeleton_minion.tscn" id="5_usb5b"]
 
 [sub_resource type="Environment" id="Environment_hg5jy"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_usb5b"]
+vertices = PackedVector3Array(-19.5, 0.39910865, -6.25, -9, 0.39910865, -6.25, -9, 0.39910865, -7, -3.5, 0.39910865, -12.25, -3.5, 0.39910865, -19.5, -19.5, 0.39910865, -19.5, -2.5, 0.39910865, -11, -5, 0.39910865, -8.5, -4.25, 0.39910865, -8, 2.5, 0.39910865, -8.25, -2.5, 0.39910865, -11.75, 2.75, 0.39910865, -19.5, 14.5, 0.39910865, -5.5, 14.5, 0.39910865, -3, 19.5, 0.39910865, -3, 19.5, 0.39910865, -19.5, 4.25, 0.39910865, -7, 3.75, 0.39910865, -6.75, 12.75, 0.39910865, -5.25, 13, 0.39910865, -5.75, 4.25, 0.39910865, -8, -4, 0.39910865, -6.75, -8, 0.39910865, -5.5, 19.5, 0.39910865, 19.5, 14.5, 0.39910865, -0.75, 13, 0.39910865, -0.5, -8.75, 0.39910865, -5.5, -19.5, 0.39910865, 19.5, 22, -2.1008914, -4.75, 22, -2.1008914, -1.5, 25, -2.1008914, -1.5, 25, -2.1008914, -4.75)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(3, 2, 4), PackedInt32Array(4, 2, 0), PackedInt32Array(4, 0, 5), PackedInt32Array(7, 6, 8), PackedInt32Array(8, 6, 9), PackedInt32Array(4, 11, 10), PackedInt32Array(10, 11, 9), PackedInt32Array(9, 6, 10), PackedInt32Array(4, 10, 3), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 15), PackedInt32Array(18, 17, 16), PackedInt32Array(18, 16, 19), PackedInt32Array(19, 16, 20), PackedInt32Array(11, 20, 9), PackedInt32Array(19, 20, 12), PackedInt32Array(12, 20, 11), PackedInt32Array(12, 11, 15), PackedInt32Array(8, 21, 7), PackedInt32Array(7, 21, 22), PackedInt32Array(25, 24, 23), PackedInt32Array(13, 14, 24), PackedInt32Array(24, 14, 23), PackedInt32Array(0, 1, 26), PackedInt32Array(21, 17, 22), PackedInt32Array(22, 17, 18), PackedInt32Array(22, 18, 25), PackedInt32Array(26, 22, 25), PackedInt32Array(0, 26, 27), PackedInt32Array(27, 26, 25), PackedInt32Array(27, 25, 23), PackedInt32Array(31, 30, 28), PackedInt32Array(28, 30, 29)]
+geometry_parsed_geometry_type = 1
+geometry_source_geometry_mode = 1
+geometry_source_group_name = &"game_map"
 
 [sub_resource type="BoxMesh" id="BoxMesh_usb5b"]
 size = Vector3(40, 0.2, 40)
@@ -13,7 +21,7 @@ size = Vector3(40, 0.2, 40)
 [sub_resource type="BoxShape3D" id="BoxShape3D_xrl57"]
 size = Vector3(40, 0.2, 40)
 
-[node name="TestMap" type="Node" unique_id=226714272]
+[node name="TestMap" type="Node" unique_id=226714272 groups=["game_map"]]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=465641005]
 environment = SubResource("Environment_hg5jy")
@@ -21,6 +29,9 @@ environment = SubResource("Environment_hg5jy")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2129816226]
 transform = Transform3D(0.8660254, 0.40957603, -0.28678823, 0, 0.57357645, 0.81915206, 0.5, -0.7094065, 0.49673176, 0, 10, 0)
 shadow_enabled = true
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1515672992]
+navigation_mesh = SubResource("NavigationMesh_usb5b")
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=1595961076]
 
@@ -67,3 +78,6 @@ transform = Transform3D(0, 1.9999999, -8.742276e-08, 0, -8.742278e-08, -1.999999
 
 [node name="Dummy" parent="." unique_id=1095750906 instance=ExtResource("4_hg5jy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4039135, 0, -5.9921713)
+
+[node name="SkeletonMinion" parent="." unique_id=684571364 instance=ExtResource("5_usb5b")]
+transform = Transform3D(-0.26412776, 0, 0.9644877, 0, 1, 0, -0.9644877, 0, -0.26412776, 9.77975, -1.1920929e-07, -2.8973584)

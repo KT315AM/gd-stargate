@@ -3,6 +3,8 @@ extends CharacterBody3D
 ## Base class for all characters.
 
 
+var _logger := GameLogger.new("Character")
+
 # FIX: Temporary export weapons for debug purpose
 @export var main_weapon: Weapon
 @export var secondary_weapon: Weapon
@@ -19,6 +21,7 @@ extends CharacterBody3D
 
 
 func _ready() -> void:
+    _logger.name = name
 
     # FIX: Temporary workaround unless Equipment system implementation
     if main_weapon:

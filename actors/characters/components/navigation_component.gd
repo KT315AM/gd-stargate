@@ -42,7 +42,7 @@ func _ready() -> void:
     agent.avoidance_enabled = avoidance_enabled
     agent.navigation_finished.connect(_on_navigation_finished)
     agent.waypoint_reached.connect(_on_waypoint_reached)
-    character.add_child(agent)
+    character.add_child.call_deferred(agent)
 
 
 func set_target_position(position: Vector3) -> void:

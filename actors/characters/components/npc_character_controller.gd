@@ -13,9 +13,9 @@ var stop_distance: float = 1.6
 var navigation_target_update_distance: float = 0.5
 
 
-@onready var movement_component: NpcMovementComponent = get_node_or_null(^"NpcMovementComponent")
-@onready var navigation_component: NavigationComponent = get_node_or_null(^"NavigationComponent")
-@onready var sense_component: SenseComponent = get_node_or_null(^"SenseComponent")
+@onready var movement_component: NpcMovementComponent = character.get_node_or_null(^"NpcMovementComponent")
+@onready var navigation_component: NavigationComponent = character.get_node_or_null(^"NavigationComponent")
+@onready var sense_component: SenseComponent = character.get_node_or_null(^"SenseComponent")
 
 
 var _target: Character
@@ -45,10 +45,12 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_vision_target_acquired(target: Character) -> void:
+    character._logger.print("Vision: target acquired: %s" % [target.name])
     _set_target(target)
 
 
 func _on_vision_target_lost(target: Character) -> void:
+    character._logger.print("Vision: target lost: %s" % [target.name])
     if target != _target:
         return
 

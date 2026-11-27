@@ -9,7 +9,6 @@ signal sound_heard(source: Node, position: Vector3, loudness: float)
 
 
 @export_group("Vision")
-
 @export_range(0.0, 1000.0, 0.1)
 var vision_range: float = 25.0
 
@@ -20,13 +19,20 @@ var vision_angle: float = 120.0
 var vision_interval: float = 0.2
 
 @export_flags_3d_physics
-var vision_collision_mask: int = Constants.PHYSICS_LAYER_WORLD | Constants.PHYSICS_LAYER_CHARACTERS | Constants.PHYSICS_LAYER_STRUCTURES
+var vision_collision_mask: int = (
+    Constants.PHYSICS_LAYER_WORLD |
+    Constants.PHYSICS_LAYER_CHARACTERS |
+    Constants.PHYSICS_LAYER_STRUCTURES
+)
 
 
 @export_group("Hearing")
-
 @export_range(0.0, 1000.0, 0.1)
 var hearing_range: float = 15.0
+
+
+@export_group("Debug")
+@export var debug := false
 
 
 var vision_target: Character:
@@ -42,6 +48,11 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+    if debug:
+        var half_angle := deg_to_rad(vision_angle * 0.5)
+        var rot := character.model.global_rotation.y + PI / 4
+        DebugDraw.draw_arc(character.global_position + Vector3(0, 0.05, 0), vision_range, rot - half_angle, rot + half_angle)
+
     _vision_timer += delta
     if _vision_timer < vision_interval:
         return

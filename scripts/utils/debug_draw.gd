@@ -59,6 +59,26 @@ func draw_box(center: Vector3, size: Vector3, color: Color = Color.WHITE) -> voi
     _draw_line_raw(corners[5], corners[6], color)
 
 
+func draw_arc(center: Vector3, radius: float, start_angle: float, end_angle: float, segments: int = 12, color: Color = Color.BLACK) -> void:
+    mesh.clear_surfaces()
+    mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+    mesh.surface_set_color(color)
+    
+    var arc_points: Array[Vector3] = []
+    for i in range(segments + 1):
+        var t := float(i) / float(segments)
+        var angle := lerpf(start_angle, end_angle, t)
+        var x := center.x + cos(angle) * radius
+        var z := center.z + sin(angle) * radius
+        var point = Vector3(x, center.y, z)
+        arc_points.append(point)
+        mesh.surface_add_vertex(point)
+        
+    mesh.surface_end()
+    _draw_line_raw(center, arc_points[0], color)
+    _draw_line_raw(center, arc_points.back(), color)
+
+
 func _draw_line_raw(start: Vector3, end: Vector3, color: Color) -> void:
     mesh.surface_begin(Mesh.PRIMITIVE_LINES)
     mesh.surface_set_color(color)
