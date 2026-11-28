@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bymvub8yu5tnp" path="res://actors/characters/components/health_component.gd" id="10_health"]
 [ext_resource type="Script" uid="uid://hp4jxyepujtt" path="res://actors/characters/components/combat_component.gd" id="11_combat"]
 [ext_resource type="Script" uid="uid://cev4t6d2chou2" path="res://actors/characters/components/strafe_movement_component.gd" id="12_3ft85"]
+[ext_resource type="Script" path="res://actors/characters/components/equipment_component.gd" id="13_equip"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wq3o7"]
 radius = 0.4
@@ -243,6 +244,9 @@ script = ExtResource("12_3ft85")
 script = ExtResource("8_g6d0x")
 animation_tree = NodePath("../Model/AnimationTree")
 metadata/_custom_type_script = "uid://dlel1piv7tka"
+
+[node name="EquipmentComponent" type="Node" parent="." unique_id=1290020200]
+script = ExtResource("13_equip")
 
 [node name="HealthComponent" type="Node" parent="." unique_id=1528214062]
 script = ExtResource("10_health")
