@@ -5,7 +5,7 @@ extends Equipment
 ## Base class for all weapons
 
 
-enum State 
+enum State
 {
     UNARMED,
     ARMED,
@@ -36,6 +36,10 @@ signal state_changed(previous_state: State, new_state: State)
 ## Deviation from aim, degrees
 @export var spread: float = 0.5
 @export var state: State = State.UNARMED
+
+@export_group("Locomotion")
+## Animation set used while this weapon is equipped.
+@export var locomotion_profile: LocomotionAnimationProfile
 
 
 @export_group("References")
@@ -68,10 +72,10 @@ func _ready() -> void:
     add_child(_attack_timer)
 
     camera = get_viewport().get_camera_3d()
-    
+
     if not muzzle:
         muzzle = get_node_or_null("Muzzle")
-    
+
     if not caster:
         caster = muzzle if muzzle else camera
 
@@ -93,7 +97,7 @@ func unarm():
 func attack() -> void:
     if not can_attack:
         return
-    
+
     _set_state(State.ATTACKING)
     _on_attack()
     attacking.emit()
@@ -104,7 +108,7 @@ func attack() -> void:
 func start_attack() -> void:
     if not can_attack:
         return
-    
+
     if not _attack_timer.is_stopped():
         return
 
@@ -154,7 +158,7 @@ func _play_hit_effects() -> void:
 func _set_state(new_state: State) -> void:
     if new_state == state:
         return
-    
+
     var previous_state = state
     state = new_state
     state_changed.emit(previous_state, new_state)
