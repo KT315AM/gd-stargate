@@ -3,6 +3,7 @@
 
 # LFS
 *.res filter=lfs diff=lfs merge=lfs -text
+*.depren filter=lfs diff=lfs merge=lfs -text
 *.glb filter=lfs diff=lfs merge=lfs -text
 *.gltf filter=lfs diff=lfs merge=lfs -text
 *.bin filter=lfs diff=lfs merge=lfs -text
