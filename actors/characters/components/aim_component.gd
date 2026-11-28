@@ -14,8 +14,8 @@ func _ready() -> void:
     if not upper_body_aim_modifier:
         push_warning("UpperBodyAimModifier is not assigned.")
 
-    if not weapon_rig:
-        push_warning("WeaponRig is not assigned.")
+    # if not weapon_rig:
+    #     push_warning("WeaponRig is not assigned.")
 
 
 func _process(_delta: float) -> void:

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bd7pfiikt4q4"]
+
+[ext_resource type="PackedScene" uid="uid://f8kj3piwue2j" path="res://actors/weapons/rocketlauncher/rocketlauncher.tscn" id="1_mr3ho"]
+[ext_resource type="PackedScene" uid="uid://dangrgr0v8cyv" path="res://actors/weapons/ak47/ak47.tscn" id="2_cr160"]
+
+[node name="WeaponRig" type="Node3D" unique_id=447539986]
+
+[node name="RightHandTarget" type="Marker3D" parent="." unique_id=1208533547]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25240842, -0.11286187, -0.11579494)
+
+[node name="Rocketlauncher" parent="RightHandTarget" unique_id=1624528760 instance=ExtResource("1_mr3ho")]
+
+[node name="LeftHandTarget" type="Marker3D" parent="." unique_id=941174840]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27438676, -0.057326913, -0.20452975)
+
+[node name="AK47" parent="LeftHandTarget" unique_id=1882503277 instance=ExtResource("2_cr160")]
+state = 1
+
+[node name="RightElbowPole" type="Marker3D" parent="." unique_id=1671346461]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3124419, -0.100000024, -0.012775287)
+
+[node name="LeftElbowPole" type="Marker3D" parent="." unique_id=1862816031]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3116275, -0.100000024, -0.014993012)
