@@ -1,6 +1,6 @@
 class_name StrafeMovementComponent
 extends CharacterComponent
-## Handles player movement while facing the mouse cursor.
+## Handles screen-space movement while facing the mouse cursor.
 
 @export_group("Movement")
 @export_range(0.0, 20.0, 0.1)
@@ -39,7 +39,7 @@ func _update_movement(delta: float) -> void:
         "move_back"
     )
 
-    var move_direction := _get_facing_relative_direction(input_direction)
+    var move_direction := _get_screen_space_direction(input_direction)
     var target_velocity := move_direction * max_speed
     var current_velocity := Vector3(character.velocity.x, 0.0, character.velocity.z)
     var rate := acceleration if input_direction.length_squared() > 0.0 else deceleration
@@ -48,22 +48,35 @@ func _update_movement(delta: float) -> void:
     character.velocity.z = current_velocity.z
 
 
-func _get_facing_relative_direction(input_direction: Vector2) -> Vector3:
-    if input_direction == Vector2.ZERO or not character.model:
+func _get_screen_space_direction(input_direction: Vector2) -> Vector3:
+    if input_direction == Vector2.ZERO:
         return Vector3.ZERO
 
-    var character_right := character.model.global_basis.x
-    var character_backward := character.model.global_basis.z
-    character_right.y = 0.0
-    character_backward.y = 0.0
-    character_right = character_right.normalized()
-    character_backward = character_backward.normalized()
+    var camera := character.get_viewport().get_camera_3d()
+    if not camera:
+        return Vector3(input_direction.x, 0.0, -input_direction.y).normalized()
 
-    var direction := (
-        character_right * input_direction.x
-        + character_backward * input_direction.y
-    )
+    var screen_right := camera.global_basis.x
+    var screen_up := camera.global_basis.y
 
+    screen_right.y = 0.0
+    screen_up.y = 0.0
+
+    if screen_right.length_squared() < 0.0001:
+        screen_right = Vector3.RIGHT
+    else:
+        screen_right = screen_right.normalized()
+
+    if screen_up.length_squared() < 0.0001:
+        screen_up = -camera.global_basis.z
+        screen_up.y = 0.0
+
+    if screen_up.length_squared() < 0.0001:
+        screen_up = Vector3.FORWARD
+    else:
+        screen_up = screen_up.normalized()
+
+    var direction := screen_right * input_direction.x - screen_up * input_direction.y
     return direction.normalized()
 
 
