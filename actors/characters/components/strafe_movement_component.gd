@@ -6,6 +6,9 @@ extends CharacterComponent
 @export_range(0.0, 20.0, 0.1)
 var max_speed: float = 5.0
 
+@export_range(0.0, 20.0, 0.1)
+var backward_speed: float = 2.0
+
 @export_range(0.0, 100.0, 0.1)
 var acceleration: float = 20.0
 
@@ -40,7 +43,19 @@ func _update_movement(delta: float) -> void:
     )
 
     var move_direction := _get_screen_space_direction(input_direction)
-    var target_velocity := move_direction * max_speed
+    var movement_basis := character.global_basis.orthonormalized()
+    if character.model:
+        movement_basis = character.model.global_basis.orthonormalized()
+
+    var local_direction := movement_basis.inverse() * move_direction
+    local_direction.y = 0.0
+
+    var local_target_velocity := Vector3(
+        local_direction.x * max_speed,
+        0.0,
+        local_direction.z * (backward_speed if local_direction.z > 0.0 else max_speed)
+    )
+    var target_velocity := movement_basis * local_target_velocity
     var current_velocity := Vector3(character.velocity.x, 0.0, character.velocity.z)
     var rate := acceleration if input_direction.length_squared() > 0.0 else deceleration
     current_velocity = current_velocity.move_toward(target_velocity, rate * delta)
