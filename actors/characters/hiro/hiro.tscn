@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://bymvub8yu5tnp" path="res://actors/characters/components/health_component.gd" id="10_health"]
 [ext_resource type="Script" uid="uid://hp4jxyepujtt" path="res://actors/characters/components/combat_component.gd" id="11_combat"]
 [ext_resource type="Script" uid="uid://cev4t6d2chou2" path="res://actors/characters/components/strafe_movement_component.gd" id="12_3ft85"]
+[ext_resource type="AnimationLibrary" uid="uid://cx8gwik4e7gcs" path="res://assets/kk/characters/animations/rig_medium/Rig_Medium_MovementAdvanced.glb" id="13_movadv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wq3o7"]
 radius = 0.4
@@ -36,21 +37,42 @@ animation = &"Hiro/walk"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qc3xf"]
 animation = &"Hiro/run"
 
-[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_sfxaa"]
-min_space = 0.0
-value_label = "speed"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_backward"]
+animation = &"MovementAdvanced/Walking_Backwards"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_strafe_left"]
+animation = &"MovementAdvanced/Running_Strafe_Left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_strafe_right"]
+animation = &"MovementAdvanced/Running_Strafe_Right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_locomotion"]
+min_space = Vector2(-5, -2)
+max_space = Vector2(5, 5)
+value_label_x = "strafe"
+value_label_y = "forward"
 blend_point_0/node = SubResource("AnimationNodeAnimation_huwrn")
-blend_point_0/pos = 0.0
-blend_point_0/name = &"Hiro_idle"
+blend_point_0/pos = Vector2(0, 0)
+blend_point_0/name = &"idle"
 blend_point_1/node = SubResource("AnimationNodeAnimation_g6d0x")
-blend_point_1/pos = 0.5
-blend_point_1/name = &"Hiro_walk"
+blend_point_1/pos = Vector2(0, 2.5)
+blend_point_1/name = &"walk_forward"
 blend_point_2/node = SubResource("AnimationNodeAnimation_qc3xf")
-blend_point_2/pos = 1.0
-blend_point_2/name = &"Hiro_run"
+blend_point_2/pos = Vector2(0, 5)
+blend_point_2/name = &"run_forward"
+blend_point_3/node = SubResource("AnimationNodeAnimation_backward")
+blend_point_3/pos = Vector2(0, -2)
+blend_point_3/name = &"walk_backward"
+blend_point_4/node = SubResource("AnimationNodeAnimation_strafe_left")
+blend_point_4/pos = Vector2(-5, 0)
+blend_point_4/name = &"run_strafe_left"
+blend_point_5/node = SubResource("AnimationNodeAnimation_strafe_right")
+blend_point_5/pos = Vector2(5, 0)
+blend_point_5/name = &"run_strafe_right"
+triangles = PackedInt32Array(0, 1, 4, 0, 5, 1, 1, 2, 4, 1, 5, 2, 0, 3, 4, 0, 5, 3)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_qc3xf"]
-nodes/Locomotion/node = SubResource("AnimationNodeBlendSpace1D_sfxaa")
+nodes/Locomotion/node = SubResource("AnimationNodeBlendSpace2D_locomotion")
 nodes/Locomotion/position = Vector2(-100, 140)
 node_connections = [&"output", 0, &"Locomotion"]
 
@@ -235,13 +257,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3116275, -0.100000024, -0.
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Model" unique_id=2007802630]
 libraries/Hiro = SubResource("AnimationLibrary_g6d0x")
+libraries/MovementAdvanced = ExtResource("13_movadv")
 autoplay = &"Hiro/idle"
 
 [node name="AnimationTree" type="AnimationTree" parent="Model" unique_id=1753546459]
 active = false
 tree_root = SubResource("AnimationNodeBlendTree_qc3xf")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Locomotion/blend_position = 0.0
+parameters/Locomotion/blend_position = Vector2(0, 0)
 parameters/Locomotion/observer = null
 
 [node name="Rig" parent="." unique_id=889413010 instance=ExtResource("5_3ft85")]
