@@ -44,6 +44,12 @@ func _ready() -> void:
         return
 
     _unarmed_tree_root = animation_tree.tree_root
+    if _unarmed_tree_root is AnimationNodeBlendTree:
+        var blend_tree := _unarmed_tree_root as AnimationNodeBlendTree
+        var locomotion_node := blend_tree.get_node(&"Locomotion")
+        if locomotion_node:
+            _unarmed_tree_root = locomotion_node
+
     _create_state_machine()
 
     animation_tree.active = true
